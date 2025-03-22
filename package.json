@@ -1,0 +1,52 @@
+{
+    "name": "amount-formatter",
+    "description": "Format amount to currency and currency to amount",
+    "version": "1.0.0",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist",
+        "readme.md",
+        "package.json",
+        "LICENSE"
+    ],
+    "scripts": {
+        "start": "node dist/index.js",
+        "build": "tsup src/index.ts --format esm,cjs --dts",
+        "build:watch": "tsup src/index.ts --format esm,cjs --dts --watch",
+        "dev": "nodemon dist/index.js",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "prepare": "npm run build",
+        "prepublishOnly": "npm test"
+    },
+    "keywords": [
+        "currency",
+        "formatter",
+        "amount",
+        "money",
+        "finance",
+        "typescript",
+        "react",
+        "web"
+    ],
+    "author": "Edgar de Dios eduardoddg60@gmail.com",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/iDDGE7/amount-formatter"
+    },
+    "bugs": {
+        "url": "https://github.com/iDDGE7/amount-formatter/issues"
+    },
+    "homepage": "https://github.com/iDDGE7/amount-formatter#readme",
+    "devDependencies": {
+        "@types/jest": "^29.5.14",
+        "jest": "^29.7.0",
+        "nodemon": "^3.1.9",
+        "ts-jest": "^29.2.6",
+        "tsup": "^8.4.0",
+        "typescript": "^5.8.2"
+    }
+}
