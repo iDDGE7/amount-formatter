@@ -18,8 +18,9 @@ describe('currency function', () => {
     });
 
     test('error handling', () => {
-        //@ts-expect-error
-        expect(() => currency()).toThrow();
+        expect(currency()).toBe('');
+        expect(currency(null)).toBe('');
+        expect(currency(undefined)).toBe('');
     });
 
     test('handles string input by removing non-numeric characters', () => {
