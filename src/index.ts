@@ -1,4 +1,4 @@
-export const currency = (value?: number | string | null): string => {
+export const currency = (value?: number | string | null, options?: { truncate?: number }): string => {
     if (value === undefined || value === null || value === '') {
         return '';
     }
@@ -6,12 +6,17 @@ export const currency = (value?: number | string | null): string => {
     let v: string = typeof value === 'number' ? value.toString() : value;
     v = v.replace(/[^0-9.-]/g, '');
 
-    const num = Number(v);
+    let num = Number(v);
     if (isNaN(num)) return '';
 
+    if (options?.truncate !== undefined) {
+        const factor = Math.pow(10, options.truncate);
+        num = Math.trunc(num * factor) / factor;
+    }
+
     const formatter = new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
+        minimumFractionDigits: options?.truncate ?? 2,
+        maximumFractionDigits: options?.truncate ?? 2,
     });
 
     return formatter.format(num);

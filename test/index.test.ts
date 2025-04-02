@@ -8,6 +8,12 @@ describe('currency function', () => {
         expect(currency(1000.555)).toBe('1,000.56');
     });
 
+    test('formats valid number to currency with truncated decimals', () => {
+        expect(currency('1000.02', { truncate: 0 })).toBe('1,000');
+        expect(currency('1000.02', { truncate: 1 })).toBe('1,000.0');
+        expect(currency('1000.02', { truncate: 2 })).toBe('1,000.02');
+    });
+
     test('handles zero correctly', () => {
         expect(currency(0)).toBe('0.00');
     });

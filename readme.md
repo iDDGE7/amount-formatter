@@ -16,8 +16,8 @@ yarn add amount-formatter
 
 ## Features
 
-- Convert numbers to currency format 
-- Convert currency formatted strings to numeric values
+-   Convert numbers to currency format
+-   Convert currency formatted strings to numeric values
 
 ## Usage
 
@@ -28,11 +28,23 @@ Converts a number or string to currency format:
 ```typescript
 import { currency } from 'amount-formatter';
 
-currency(1000);         // "1,000.00"
-currency('1000');       // "1,000.00"
-currency('1,000');      // "1,000.00"
-currency('1000.5');     // "1,000.50"
-currency('$1,000.50');  // "1,000.50"
+currency(1000); // "1,000.00"
+currency('1000'); // "1,000.00"
+currency('1,000'); // "1,000.00"
+currency('1000.5'); // "1,000.50"
+currency('$1,000.50'); // "1,000.50"
+currency(''); // ""
+currency(undefined); // ""
+currency(null); // ""
+currency(); // ""
+```
+
+You can optionally truncate decimals and add currency symbols:
+
+```typescript
+currency(123.4567, { truncate: 2 }); // "123.45"
+currency(123.4567, { truncate: 0 }); // "123"
+currency(123.4567, { truncate: 4 }); // "123.4567"
 ```
 
 ### double()
@@ -42,33 +54,39 @@ Converts a currency formatted string to a number:
 ```typescript
 import { double } from 'amount-formatter';
 
-double(1000);          // 1000
-double('1000');        // 1000
-double('1,000');       // 1000
-double('$1,000.50');   // 1000.5
+double(1000); // 1000
+double('1000'); // 1000
+double('1,000'); // 1000
+double('$1,000.50'); // 1000.5
 ```
 
 ## API
 
-### currency(value: number | string): string
+### currency(value: number | string, options?: { truncate?: number }): string
 
 Formats a number or string to currency format.
 
 **Parameters:**
-- `value`: The value to format. Can be a number or a string.
+
+-   `value`: The value to format. Can be a number or a string.
+-   `options`: Optional parameter to control formatting:
+    -   `truncate`: Number of decimals to truncate to.
 
 **Returns:**
-- A string in currency format (e.g., "1,000.00").
+
+-   A string in currency format (e.g., "1,000.00").
 
 ### double(value: number | string): number
 
 Converts a currency formatted string to a number.
 
 **Parameters:**
-- `value`: The value to convert. Can be a number or a string.
+
+-   `value`: The value to convert. Can be a number or a string.
 
 **Returns:**
-- A number.
+
+-   A number.
 
 ## Examples
 
@@ -81,19 +99,20 @@ const formattedPrice = currency(price);
 console.log(formattedPrice); // "1,234.50"
 
 // Convert a string to number
-const priceString = "$1,234.50";
+const priceString = '$1,234.50';
 const numberPrice = double(priceString);
 console.log(numberPrice); // 1234.5
 
 // Format a string that already has currency format
-console.log(currency("$1,234.50")); // "1,234.50"
+console.log(currency('$1,234.50')); // "1,234.50"
 ```
 
 ## Compatibility
 
 This package works in:
-- Node.js
-- Modern browsers
+
+-   Node.js
+-   Modern browsers
 
 ## License
 
